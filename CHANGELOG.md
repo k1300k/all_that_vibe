@@ -5,6 +5,32 @@ All notable changes to Planner's Lego will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2025-11-25
+
+### Added
+- Week 5: Service Flow (7 new MCP templates)
+  - 🎯 서비스 컨셉 및 타겟 정의 (Value Proposition Canvas)
+  - 🟢 서비스 시작점 (Landing Page Design)
+  - 🔒인증 방식 설정 (OAuth & Email Auth)
+  - ✨ AI 핵심 로직 (Vibe Coding Prompts)
+  - 💳 결제 게이트웨이 (Toss/Stripe Integration)
+  - 🔀 조건부 플로우 (Business Logic Branching)
+  - 🏁 서비스 종료점 (Success Page)
+- New categories: planning, flow
+- Comprehensive Korean mock responses for all Week 5 templates
+- Updated sidebar to display 5-week curriculum
+- Updated header: 5주 커리큘럼 · 22 MCPs
+
+### Changed
+- Expanded MCP templates from 16 to 22
+- Updated curriculum structure from 4 weeks to 5 weeks
+- Enhanced store with detailed Service Flow mock data
+
+### Integration
+- Based on newday repository checklist structure
+- Aligned with prd-service-flow.md specifications
+- Incorporated Vibe Coding methodology
+
 ## [0.4.0] - 2025-11-25
 
 ### Added

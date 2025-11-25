@@ -13,12 +13,13 @@
 
 ### 핵심 기능
 
-- 🧩 **12개 MCP 템플릿** - 4주 커리큘럼 기반 체계적 구성
+- 🧩 **22개 MCP 템플릿** - 5주 커리큘럼 기반 체계적 구성
 - 🎯 **노드 기반 워크플로우** - 드래그 앤 드롭으로 간편한 구성
 - 🔗 **데이터 플로우** - 노드 간 자동 데이터 전달
 - 💾 **워크플로우 관리** - 로컬 저장/불러오기 지원
 - 📤 **다양한 내보내기** - JSON, Markdown 형식 지원
 - 🎨 **직관적 UX** - 접을 수 있는 사이드바, 노드 설정 패널
+- 🔄 **Service Flow** - newday 기반 직렬형 플로우 빌더
 
 ## 🏗️ 기술 스택
 
@@ -118,6 +119,15 @@ npm start
 - 💻 Code Gen
 - 🚀 Vibe Coding 연결 (Vibe Coding Connection)
 
+### Week 5: Service Flow 🔄
+- 🎯 서비스 컨셉 및 타겟 정의 (Target Definition)
+- 🟢 서비스 시작점 (Service Start)
+- 🔒 인증 방식 설정 (Auth Setup)
+- ✨ AI 핵심 로직 (Core Logic AI)
+- 💳 결제 게이트웨이 (Payment Integration)
+- 🔀 조건부 플로우 (Conditional Flow)
+- 🏁 서비스 종료점 (Service End)
+
 ## 🎯 주요 기능 상세
 
 ### 1. 노드 기반 워크플로우
@@ -160,6 +170,7 @@ npm start
 - **v0.2**: 12 MCP 완성, 워크플로우 관리, 내보내기 기능
 - **v0.3**: UX 디자인 전면 개선
 - **v0.4**: 프로그램 정보 모달 및 개발 이력 추가
+- **v0.5**: Week 5 Service Flow 추가 (22 MCPs)
 
 ## 🤝 기여 방법
 
