@@ -1,4 +1,4 @@
-export type MCPCategory = 'strategy' | 'structure' | 'resource' | 'dev';
+export type MCPCategory = 'strategy' | 'structure' | 'resource' | 'dev' | 'planning' | 'flow';
 
 export type NodeStatus = 'idle' | 'loading' | 'success' | 'error';
 

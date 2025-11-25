@@ -45,6 +45,12 @@ export default function Sidebar() {
             subtitle: '프로토타입 구현',
             emoji: '🚀',
         },
+        {
+            number: 5,
+            title: 'Service Flow',
+            subtitle: '단계별 플로우 구성',
+            emoji: '🔄',
+        },
     ];
 
     return (
@@ -52,7 +58,7 @@ export default function Sidebar() {
             {/* Header */}
             <div className="p-4 border-b border-gray-100 bg-gradient-to-b from-gray-50 to-white">
                 <h2 className="text-base font-bold text-gray-900 mb-0.5">Component Library</h2>
-                <p className="text-xs text-gray-500">4주 커리큘럼 · 12 MCPs</p>
+                <p className="text-xs text-gray-500">5주 커리큘럼 · 22 MCPs</p>
             </div>
 
             {/* Week Sections */}
