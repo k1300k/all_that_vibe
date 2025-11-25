@@ -152,7 +152,7 @@ export default function Sidebar() {
             {/* Footer */}
             <div className="p-3 border-t border-gray-100 bg-gray-50">
                 <p className="text-xs text-gray-500 text-center font-medium">
-                    Planner's Lego v0.3
+                    Planner&apos;s Lego v0.3
                 </p>
             </div>
         </div>

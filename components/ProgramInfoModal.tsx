@@ -127,7 +127,7 @@ export default function ProgramInfoModal() {
                                     </div>
                                     <div>
                                         <h2 className="text-2xl font-bold text-gray-900">
-                                            Planner's Lego
+                                            Planner&apos;s Lego
                                         </h2>
                                         <p className="text-sm text-gray-500">
                                             AI 서비스 기획 플랫폼 · 바이브코딩 프롬프트 방식
@@ -151,7 +151,7 @@ export default function ProgramInfoModal() {
                                         서비스 소개
                                     </h3>
                                     <p className="text-sm text-gray-700 leading-relaxed">
-                                        <strong>Planner's Lego</strong>는 비개발자 서비스 기획자를 위한
+                                        <strong>Planner&apos;s Lego</strong>는 비개발자 서비스 기획자를 위한
                                         노드 기반 AI 기획 플랫폼입니다. 레고 블록을 조립하듯
                                         MCP(Modular Components for Planning)를 연결하여
                                         시장조사부터 코드 생성까지 전체 기획 프로세스를 시각적으로 구성할 수 있습니다.
@@ -212,7 +212,7 @@ export default function ProgramInfoModal() {
                                                             💬 사용자 프롬프트:
                                                         </p>
                                                         <p className="text-sm text-amber-800 font-mono">
-                                                            "{ver.userPrompt}"
+                                                            &quot;{ver.userPrompt}&quot;
                                                         </p>
                                                     </div>
 

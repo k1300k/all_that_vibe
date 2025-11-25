@@ -17,7 +17,7 @@ export default function Toolbar({ onSaveClick, onLoadClick }: ToolbarProps) {
             <div className="flex items-center gap-3">
                 <div className="text-2xl">🧩</div>
                 <div>
-                    <h1 className="text-lg font-bold text-gray-800">Planner's Lego</h1>
+                    <h1 className="text-lg font-bold text-gray-800">Planner&apos;s Lego</h1>
                     <p className="text-xs text-gray-500">AI 서비스 기획 플랫폼</p>
                 </div>
             </div>
