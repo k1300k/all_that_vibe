@@ -1,0 +1,162 @@
+이 PRD(제품 요구 사항 정의서)는 **Cursor**(AI 코드 에디터)를 활용해 개발자가 즉시 코딩을 시작할 수 있도록 기술적 스펙을 구체화한 버전입니다.
+
+\*\*'Google Antigravity'\*\*는 구글의 이스터에그(중력 효과)를 말씀하시는 것으로 보이나, 문맥상 **'Google의 최신 AI 개발 환경(Project IDX, Vertex AI Agent Builder)'** 또는 \*\*'중력처럼 끌어당기는 몰입감 있는 환경'\*\*이라는 비유적 표현으로 이해하고, **최신 웹 기술 스택(Next.js + React Flow)** 기반으로 작성했습니다.
+
+-----
+
+# [PRD] AI 서비스 기획 교육용 MCP(Modular Component for Planning) 플랫폼
+
+## 1\. 개요 (Overview)
+
+  * **프로젝트명:** Planner’s Lego (가칭)
+  * **목적:** 개발 지식이 없는 서비스 기획자가 노드(Node) 기반의 UI를 통해 AI 프롬프트를 레고처럼 조립하여 기획 산출물을 자동 생성하고, 서비스 로직을 시각적으로 학습한다.
+  * **핵심 가치:** `Visual Logic` (시각적 논리), `Modular Planning` (모듈형 기획), `Collaboration` (팀 단위 데이터 연결)
+  * **타겟 유저:** AI 서비스 기획자 과정 수강생 (비개발자 중심)
+
+-----
+
+## 2\. 시스템 아키텍처 및 기술 스택 (For Cursor Setup)
+
+이 내용은 Cursor의 `Composer`나 `Chat`에 입력하여 기본 골격을 잡을 때 사용합니다.
+
+[Image of react nextjs architecture diagram]
+
+  * **Frontend:** Next.js 14 (App Router), TypeScript, Tailwind CSS
+  * **Visual Engine:** **React Flow** (노드 기반 UI 구현의 핵심 라이브러리)
+  * **State Management:** Zustand (노드 상태 및 데이터 흐름 관리)
+  * **Backend/API:** Next.js API Routes (Serverless)
+  * **AI Integration:** OpenAI API (GPT-4o) 또는 Anthropic API (Claude 3.5 Sonnet)
+  * **Deployment:** Vercel
+
+-----
+
+## 3\. 핵심 기능 요구사항 (Functional Requirements)
+
+### 3.1. 워크스페이스 (Main Canvas)
+
+  * **무한 캔버스:** 사용자는 줌 인/아웃(Zoom/Pan)이 가능한 캔버스에서 작업한다.
+  * **Drag & Drop:** 왼쪽 사이드바의 MCP를 드래그하여 캔버스에 놓으면 노드가 생성된다.
+  * **Node Connection:** 노드의 오른쪽 핸들(Output)에서 선을 당겨 다른 노드의 왼쪽 핸들(Input)에 연결하면 데이터 흐름이 형성된다.
+  * **Mini Map:** 화면 우측 하단에 전체 맵을 보여주는 미니맵을 제공한다.
+
+### 3.2. 사이드바 (MCP Library)
+
+카테고리별로 미리 정의된 프롬프트 템플릿(MCP)을 제공한다.
+
+| 카테고리 | MCP 명칭 | 기능 설명 | Input Parameter |
+| :--- | :--- | :--- | :--- |
+| **Strategy** | 시장조사 MCP | 타겟 시장 동향 분석 | 주제, 타겟 연령, 국가 |
+| | 페르소나 MCP | 타겟 유저 프로필 생성 | 시장조사 결과(Text) |
+| **Structure** | IA 설계 MCP | 메뉴 트리 및 정보 구조 생성 | 서비스 컨셉, 핵심 기능 리스트 |
+| | User Story MCP | 사용자 스토리(Given-When-Then) 작성 | 페르소나, 기능 명세 |
+| **Resource** | PRD 작성 MCP | 상세 요구사항 정의서 생성 | IA 구조, User Story |
+| **Dev** | Code Gen MCP | 바이브코딩용 HTML/JS 초안 생성 | PRD 전체 내용 |
+
+### 3.3. 노드(Node) 상세 기능
+
+  * **커스텀 노드 UI:**
+      * **Header:** MCP 아이콘, 이름 (예: 🔍 시장조사)
+      * **Body:**
+          * **Input Fields:** 사용자가 직접 입력하는 변수창 (Text Area, Dropdown).
+          * **Status Indicator:** 대기(Gray) -\> 실행중(Blue/Spinner) -\> 완료(Green) -\> 에러(Red).
+      * **Handles:**
+          * Left Handle: 이전 단계 데이터 받기.
+          * Right Handle: 다음 단계로 데이터 보내기.
+  * **실행 버튼 (Play Button):** 각 노드에는 개별 실행 버튼이 있어, 해당 단계만 테스트할 수 있어야 한다.
+
+### 3.4. 데이터 흐름 및 실행 엔진 (Workflow Engine)
+
+  * **Chaining:** 노드 A의 `Output Result`는 노드 B의 `Input Context`로 자동 주입된다.
+  * **Prompt Injection:**
+      * 시스템은 백그라운드에서 `User Input` + `Connected Node Data` + `System Prompt Template`을 합쳐서 LLM에 전송한다.
+      * *예시 로직:* `LLM Request = "너는 [시장조사 전문가]야. [이전 노드 결과]를 바탕으로 [사용자 입력 타겟]에 대한 분석을 해줘."`
+
+-----
+
+## 4\. 데이터 구조 (Data Schema)
+
+개발 시 Typescript Interface로 활용될 구조입니다.
+
+```typescript
+// MCP(노드) 정의
+interface MCPNode {
+  id: string;
+  type: 'mcpNode'; // Custom Node Type
+  position: { x: number; y: number };
+  data: {
+    label: string; // 예: "시장조사"
+    category: 'strategy' | 'structure' | 'resource' | 'dev';
+    description: string;
+    inputs: {
+      userPrompt: string; // 사용자가 UI에서 입력한 값
+      upstreamData: string; // 이전 노드에서 넘어온 데이터
+    };
+    systemPromptTemplate: string; // 숨겨진 프롬프트 (기획자가 미리 세팅)
+    outputResult: string; // AI 응답 결과
+    status: 'idle' | 'loading' | 'success' | 'error';
+  };
+}
+
+// 연결(Edge) 정의
+interface MCPEdge {
+  id: string;
+  source: string; // 시작 노드 ID
+  target: string; // 끝 노드 ID
+}
+```
+
+-----
+
+## 5\. UI/UX 가이드라인
+
+  * **Design System:** "Modern & Clean"
+  * **Color Palette:**
+      * Canvas Background: `#F8F9FA` (Dot Pattern 적용)
+      * Node Background: `White` with Shadow
+      * Line Color: `#333333` (Bezier Curve)
+      * Active Color: `#4F46E5` (Indigo - 실행 시)
+  * **Interactions:** 노드 연결 시 '딸깍'하는 햅틱 피드백 느낌의 애니메이션 제공.
+
+-----
+
+## 6\. Cursor용 개발 프롬프트 (복사해서 바로 사용)
+
+이 내용을 복사해서 \*\*Cursor의 AI Pane(Ctrl+L)\*\*이나 \*\*Composer(Ctrl+I)\*\*에 붙여넣으면 기본 프로토타입을 바로 만들어줍니다.
+
+```markdown
+You are an expert Full-stack Developer using Next.js 14, TypeScript, Tailwind CSS, and React Flow.
+I need to build a "No-code AI Planning Platform" where users can drag and drop nodes to build a workflow.
+
+**Key Features to Implement:**
+1. **Setup:** Initialize a Next.js app with Tailwind CSS.
+2. **React Flow Integration:**
+   - Create a full-screen canvas.
+   - Create a Custom Node component called `MCPNode`.
+   - The `MCPNode` should have:
+     - A title header.
+     - A text area for user input.
+     - A "Run" button to trigger an AI call.
+     - A display area for the AI response.
+     - Input handle (left) and Output handle (right).
+3. **Sidebar:**
+   - Create a sidebar with draggable items: "Market Research", "Service Concept", "IA Structure", "PRD Generation".
+   - Implementing HTML5 Drag and Drop API to drop these onto the React Flow canvas.
+4. **Logic:**
+   - When the "Run" button on a node is clicked, it should mock an API call (simulate 2 second delay) and return a dummy text based on the node type.
+   - (Advanced) If Node B is connected to Node A, Node B should be able to access Node A's output data.
+
+**Visual Style:**
+- Use rounded corners for nodes.
+- Use a clean, professional color scheme (Gray/Blue).
+- Add a dot pattern background to the canvas.
+
+Please create the project structure and the code for the main page (`page.tsx`), the custom node component (`MCPNode.tsx`), and the store logic using Zustand.
+```
+
+-----
+
+### 💡 15년차 기획자의 조언 (Implementation Tip)
+
+1.  **단계적 개발:** 처음부터 실제 LLM(OpenAI API)을 붙이지 마세요. 비용이 발생하고 디버깅이 어렵습니다. Cursor에게 \*"API 호출은 `setTimeout`으로 2초 뒤에 가짜 텍스트를 리턴하게 Mocking 해줘"\*라고 요청해서 UI/UX 연결성부터 완성하세요.
+2.  **프롬프트 관리:** 각 MCP 안에 들어갈 `System Prompt`가 핵심 자산입니다. 코드가 아닌 별도의 JSON 파일이나 상수로 관리하도록 개발 요청을 하시면 나중에 수정하기 편합니다.
+3.  **n8n 벤치마킹:** UI가 고민되시면 **n8n**이나 **ComfyUI**의 인터페이스를 참고하시면 됩니다. 이들이 가장 표준화된 노드 기반 UI입니다.
